@@ -1714,9 +1714,13 @@ class StatusCalculator {
 
 ## Correctness Properties
 
+*A property is a characteristic or behavior that should hold true across all valid executions of a system—essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
+
 ### Property 1: Min-Heap Invariant
 
 **Universal Property**: For all nodes in the MinHeap, the parent's expiry date is less than or equal to its children's expiry dates.
+
+**Validates: Requirements 3.1, 3.6, 3.7, 3.8**
 
 ```typescript
 function verifyMinHeapProperty(heap: MinHeap): boolean {
@@ -1747,6 +1751,8 @@ function verifyMinHeapProperty(heap: MinHeap): boolean {
 
 **Universal Property**: For all keys in the HashMap, each key maps to at most one medicine, and no two medicines share the same ID.
 
+**Validates: Requirements 1.2, 4.9**
+
 ```typescript
 function verifyHashMapUniqueness(hashmap: MedicineHashMap): boolean {
   const medicines = hashmap.getAllMedicines();
@@ -1766,6 +1772,8 @@ function verifyHashMapUniqueness(hashmap: MedicineHashMap): boolean {
 ### Property 3: FIFO Queue Order
 
 **Universal Property**: For all alerts in the AlertQueue, the dequeue order matches the enqueue order (FIFO property).
+
+**Validates: Requirements 5.1, 5.2**
 
 ```typescript
 function verifyFIFOProperty(queue: AlertQueue, testAlerts: IAlert[]): boolean {
@@ -1791,6 +1799,8 @@ function verifyFIFOProperty(queue: AlertQueue, testAlerts: IAlert[]): boolean {
 ### Property 4: Status Calculation Consistency
 
 **Universal Property**: For all medicines, the calculated status must match the expected status based on expiry date thresholds.
+
+**Validates: Requirements 2.1, 2.2, 2.3, 2.4**
 
 ```typescript
 function verifyStatusConsistency(medicine: IMedicine): boolean {
@@ -1818,6 +1828,8 @@ function verifyStatusConsistency(medicine: IMedicine): boolean {
 
 **Universal Property**: The FEFO recommendations always return medicines in ascending order of expiry date.
 
+**Validates: Requirements 3.5, 7.1, 7.2, 7.4**
+
 ```typescript
 function verifyFEFOCorrectness(heap: MinHeap, n: number): boolean {
   const recommendations = heap.getTopNExpiring(n);
@@ -1835,6 +1847,8 @@ function verifyFEFOCorrectness(heap: MinHeap, n: number): boolean {
 ### Property 6: Alert Generation Completeness
 
 **Universal Property**: For all medicines requiring alerts (expiring within 30 days or low stock), appropriate alerts are generated.
+
+**Validates: Requirements 5.5, 5.6, 5.7, 5.8, 5.9, 11.6**
 
 ```typescript
 function verifyAlertCompleteness(medicine: IMedicine, alerts: IAlert[]): boolean {
@@ -1863,6 +1877,8 @@ function verifyAlertCompleteness(medicine: IMedicine, alerts: IAlert[]): boolean
 ### Property 7: History Chronological Order
 
 **Universal Property**: For all entries in the HistoryLinkedList, timestamps are in descending order from head to tail (newest first).
+
+**Validates: Requirements 6.9**
 
 ```typescript
 function verifyHistoryChronology(history: HistoryLinkedList): boolean {
