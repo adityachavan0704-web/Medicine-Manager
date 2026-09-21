@@ -7,4 +7,7 @@ export default {
     '!src/server.js',
     '!src/**/*.test.js',
   ],
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 };
