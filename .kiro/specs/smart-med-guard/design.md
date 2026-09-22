@@ -377,7 +377,7 @@ interface IMedicine {
   quantity: number;        // Current stock quantity
   unit: string;           // e.g., "tablets", "bottles", "boxes"
   price: number;          // Unit price
-  lowStockThreshold: number; // Alert when quantity below this
+  lowStockThreshold: number; // Alert when quantity below thisx
   
   // Expiry management
   expiryDate: Date;
