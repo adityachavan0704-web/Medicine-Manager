@@ -2,32 +2,35 @@
 
 A full-stack web application demonstrating practical implementations of core data structures (MinHeap, HashMap, Queue, LinkedList) while solving real-world medicine inventory management problems.
 
+**🎓 Data Structures & Algorithms College Project**
+
 ## 📋 Project Overview
 
-SmartMedGuard is a Data Structures & Algorithms college project that provides intelligent medicine management using:
+SmartMedGuard is a comprehensive medicine management system that showcases:
 - **Min-Heap** for expiry prioritization and FEFO recommendations
 - **Hash Table** for O(1) medicine lookups
 - **Queue** for FIFO alert management  
 - **Linked List** for chronological history tracking
 
+Built with modern web technologies and following software engineering best practices.
+
 ## ✨ Key Features
 
-- 🏥 Medicine inventory management with comprehensive details
-- ⏰ Auto-calculated medicine status (Safe/Expiring Soon/Critical/Expired)
-- 📊 FEFO (First Expire First Out) recommendations
-- 🔔 Smart multi-tier alerts (30-day, 7-day, 1-day warnings + low stock)
-- 📈 Real-time dashboard with analytics and charts
-- 🔍 Fast O(1) medicine search using HashMap
-- 📜 Activity history tracking with Linked List
-- 🎨 Premium healthcare SaaS UI with medical green theme
-- 🌙 Dark mode support
-- 📱 Fully responsive (mobile/tablet/desktop)
-- 🎓 Data structure visualization page for CP demonstration
+- 🏥 **Medicine Inventory Management** - Complete CRUD with comprehensive details
+- ⏰ **Auto-calculated Status** - Safe/Expiring Soon/Critical/Expired (based on expiry date)
+- 📊 **FEFO Recommendations** - First Expire First Out using MinHeap
+- 🔔 **Smart Multi-tier Alerts** - 30-day, 7-day, 1-day warnings + low stock alerts
+- 📈 **Real-time Dashboard** - Analytics with interactive charts
+- 🔍 **Fast O(1) Search** - Using custom HashMap implementation
+- 📜 **Activity History** - Chronological tracking with Linked List
+- 🎨 **Premium UI** - Medical green theme with dark mode support
+- 📱 **Fully Responsive** - Works on mobile, tablet, and desktop
+- 🎓 **DS Visualization** - Interactive diagrams for all data structures
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- React 18 with TypeScript
+- React 18 (JavaScript)
 - Vite (build tool)
 - TailwindCSS (styling)
 - React Router (routing)
@@ -40,7 +43,12 @@ SmartMedGuard is a Data Structures & Algorithms college project that provides in
 - MySQL 8.0+ (database)
 - JWT (authentication)
 - Bcrypt (password hashing)
-- Custom data structure implementations
+- **Custom data structure implementations** (MinHeap, HashMap, Queue, LinkedList)
+
+### Architecture
+- Three-tier pattern (Presentation → Business Logic → Data)
+- RESTful API design
+- Role-based access control (Admin, Pharmacist, Viewer)
 
 ## 📊 Data Structures Used
 
@@ -74,53 +82,53 @@ SmartMedGuard is a Data Structures & Algorithms college project that provides in
   - Search: O(n)
 - **Use Cases**: Medicine operation history, audit trail
 
-## 🚀 Installation & Setup
+## 🚀 Quick Start
+
+**See [SETUP.md](SETUP.md) for detailed setup instructions.**
 
 ### Prerequisites
-- Node.js 18+ installed
-- MySQL 8.0+ installed and running
-- npm or yarn package manager
+- Node.js 18+
+- MySQL 8.0+
+- npm or yarn
 
-### Backend Setup
+### Installation
 
-```bash
-# Navigate to backend directory
-cd backend
+1. **Database Setup**
+   ```bash
+   mysql -u root -p -e "CREATE DATABASE smartmedguard"
+   mysql -u root -p smartmedguard < database/schema.sql
+   ```
 
-# Install dependencies
-npm install
+2. **Backend Setup**
+   ```bash
+   cd backend
+   cp .env.example .env
+   # Edit .env with your database credentials
+   npm install
+   npm run seed
+   npm run dev
+   ```
 
-# Copy environment variables
-cp .env.example .env
+3. **Frontend Setup** (in a new terminal)
+   ```bash
+   cd frontend
+   cp .env.example .env
+   npm install
+   npm run dev
+   ```
 
-# Update .env with your database credentials
+4. **Access Application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000/api
+   - Login: `admin` / `admin123`
 
-# Run database migrations
-npm run migrate
+## 🎯 Demo Credentials
 
-# Seed sample data
-npm run seed
-
-# Start development server
-npm run dev
-```
-
-Backend will run on `http://localhost:5000`
-
-### Frontend Setup
-
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-Frontend will run on `http://localhost:5173`
+| Role | Username | Password |
+|------|----------|----------|
+| Admin | admin | admin123 |
+| Pharmacist | pharmacist1 | pharma123 |
+| Viewer | viewer | view123 |
 
 ## 📂 Project Structure
 
