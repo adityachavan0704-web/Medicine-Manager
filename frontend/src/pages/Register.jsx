@@ -53,7 +53,7 @@ const Register = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       
-      navigate('/dashboard');
+      navigate('/app/dashboard');
     } catch (err) {
       // Display detailed validation errors from backend
       if (err.response?.data?.details && Array.isArray(err.response.data.details)) {

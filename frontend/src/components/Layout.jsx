@@ -24,11 +24,11 @@ const Layout = ({ theme, toggleTheme }) => {
   };
   
   const navigation = [
-    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Medicines', path: '/medicines', icon: Pill },
-    { name: 'Alerts', path: '/alerts', icon: Bell },
-    { name: 'Analytics', path: '/analytics', icon: BarChart3 },
-    { name: 'DS Visualization', path: '/ds-visualization', icon: Network },
+    { name: 'Dashboard', path: '/app/dashboard', icon: LayoutDashboard },
+    { name: 'Medicines', path: '/app/medicines', icon: Pill },
+    { name: 'Alerts', path: '/app/alerts', icon: Bell },
+    { name: 'Analytics', path: '/app/analytics', icon: BarChart3 },
+    { name: 'DS Visualization', path: '/app/ds-visualization', icon: Network },
   ];
   
   return (
