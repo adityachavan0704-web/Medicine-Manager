@@ -120,15 +120,19 @@ Built with modern web technologies and following software engineering best pract
 4. **Access Application**
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:5000/api
-   - Login: `admin` / `admin123`
+   - Login with any demo account (see below)
 
 ## 🎯 Demo Credentials
 
-| Role | Username | Password |
-|------|----------|----------|
-| Admin | admin | admin123 |
-| Pharmacist | pharmacist1 | pharma123 |
-| Viewer | viewer | view123 |
+All accounts accept either username or email for login.
+
+| Role | Username | Email | Password | Permissions |
+|------|----------|-------|----------|-------------|
+| **Admin** | `admin` | admin@smartmedguard.com | `admin123` | Full access (CRUD, user mgmt) |
+| **Pharmacist** | `pharmacist1` | pharmacist1@smartmedguard.com | `pharma123` | Create, Read, Update medicines |
+| **Viewer** | `viewer` | viewer@smartmedguard.com | `view123` | Read-only access |
+
+**Note:** If login fails, ensure you've run the seed script: `npm run seed` (see [SETUP.md](SETUP.md) for troubleshooting)
 
 ## 📂 Project Structure
 

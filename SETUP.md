@@ -81,6 +81,25 @@ cd "D:\DS CP"
    npm run seed
    ```
 
+   This will create:
+   - **4 sample user accounts** (admin, pharmacist1, pharmacist2, viewer)
+   - **80 sample medicines** with varied expiry statuses
+   - **Automated alerts** based on expiry dates
+   - **50 history entries** showing medicine operations
+
+   **Alternative: Manual Account Creation**
+   
+   If the seed script fails or you want to manually create just the sample users:
+   
+   ```bash
+   mysql -u root -p smartmedguard < src/scripts/create-sample-users.sql
+   ```
+   
+   Or use the password hash generator:
+   ```bash
+   node src/scripts/generate-password-hashes.js
+   ```
+
 6. **Start backend server**
    ```bash
    npm run dev
@@ -137,9 +156,74 @@ cd "D:\DS CP"
 1. **Open your browser** and go to: **http://localhost:5173**
 
 2. **Login with demo credentials:**
-   - **Admin**: `admin` / `admin123`
-   - **Pharmacist**: `pharmacist1` / `pharma123`
-   - **Viewer**: `viewer` / `view123`
+
+   | Role | Username | Password | Email | Permissions |
+   |------|----------|----------|-------|-------------|
+   | **Admin** | `admin` | `admin123` | admin@smartmedguard.com | Full access - Create, Read, Update, Delete |
+   | **Pharmacist** | `pharmacist1` | `pharma123` | pharmacist1@smartmedguard.com | Create, Read, Update medicines |
+   | **Viewer** | `viewer` | `view123` | viewer@smartmedguard.com | Read-only access |
+
+   **Note:** You can enter either the username OR email address in the login form.
+
+---
+
+## 🔐 Sample Account Details
+
+The seed script automatically creates these test accounts with properly hashed passwords (bcrypt, 10 salt rounds):
+
+### Admin Account
+- **Username:** admin
+- **Email:** admin@smartmedguard.com  
+- **Password:** admin123
+- **Role:** admin
+- **Capabilities:** Full CRUD on all resources, user management, system configuration
+
+### Pharmacist Account
+- **Username:** pharmacist1
+- **Email:** pharmacist1@smartmedguard.com
+- **Password:** pharma123  
+- **Role:** pharmacist
+- **Capabilities:** Add/edit medicines, dispense stock, view alerts, access analytics
+
+### Viewer Account
+- **Username:** viewer
+- **Email:** viewer@smartmedguard.com
+- **Password:** view123
+- **Role:** viewer  
+- **Capabilities:** View-only access to all data, no modifications allowed
+
+### Creating Additional Accounts
+
+**Option 1: Use the Seed Script**
+```bash
+cd backend
+npm run seed
+```
+
+**Option 2: Manual SQL Script**
+```bash
+mysql -u root -p smartmedguard < backend/src/scripts/create-sample-users.sql
+```
+
+**Option 3: Generate Custom Password Hashes**
+```bash
+cd backend
+node src/scripts/generate-password-hashes.js
+```
+
+Then manually insert into database:
+```sql
+INSERT INTO users (id, username, email, password_hash, role, preferences, created_at)
+VALUES (
+    UUID(),
+    'newuser',
+    'newuser@example.com',
+    'your_generated_hash_here',
+    'pharmacist',
+    '{"theme":"light","alertNotifications":true}',
+    NOW()
+);
+```
 
 ---
 
@@ -207,6 +291,59 @@ mysql -u root -p smartmedguard < database/schema.sql
 # Try seed again
 npm run seed
 ```
+
+### Login fails with "Invalid credentials"
+
+**Problem:** Field name mismatch between frontend and backend
+
+**Solution 1: Verify Sample Accounts Exist**
+```bash
+# Check if users exist in database
+mysql -u root -p smartmedguard -e "SELECT username, email, role FROM users"
+```
+
+If no users found, run the seed script:
+```bash
+cd backend
+npm run seed
+```
+
+Or manually create users:
+```bash
+mysql -u root -p smartmedguard < backend/src/scripts/create-sample-users.sql
+```
+
+**Solution 2: Test Password Hashes**
+
+The seed script uses bcrypt with 10 salt rounds. If login still fails:
+
+1. Generate a new hash:
+```bash
+cd backend
+node src/scripts/generate-password-hashes.js
+```
+
+2. Manually update the password in database:
+```sql
+UPDATE users 
+SET password_hash = 'your_new_hash_here' 
+WHERE username = 'admin';
+```
+
+**Solution 3: Check Network Request**
+
+1. Open browser DevTools (F12)
+2. Go to Network tab
+3. Try logging in
+4. Check the POST request to `/api/auth/login`
+5. Verify the request body contains `usernameOrEmail` field (not `username`)
+
+**Common Login Issues:**
+- ❌ Using wrong credentials
+- ❌ Database not seeded
+- ❌ Backend server not running
+- ❌ CORS errors (check backend .env CORS_ORIGIN)
+- ❌ JWT_SECRET not set in backend .env
 
 ---
 

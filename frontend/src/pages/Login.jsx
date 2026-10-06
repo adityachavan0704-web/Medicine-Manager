@@ -6,7 +6,7 @@ import { authAPI } from '../services/api';
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
+    usernameOrEmail: '',
     password: '',
   });
   const [error, setError] = useState('');
@@ -68,15 +68,15 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Username
+                Username or Email
               </label>
               <input
                 type="text"
-                name="username"
-                value={formData.username}
+                name="usernameOrEmail"
+                value={formData.usernameOrEmail}
                 onChange={handleChange}
                 className="input-field"
-                placeholder="Enter your username"
+                placeholder="Enter your username or email"
                 required
               />
             </div>
